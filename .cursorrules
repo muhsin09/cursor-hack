@@ -1,0 +1,306 @@
+# Cursor AI Asistan Kuralları - Hackathon Takım Standartları
+
+## DİL VE İLETİŞİM
+- Tüm açıklamalar, yanıtlar ve yorumlar TÜRKÇE olmalı
+- Değişken, fonksiyon ve class isimleri İngilizce (camelCase/PascalCase)
+- Commit mesajları, hata mesajları, log mesajları Türkçe
+- Her değişikliği 1-2 cümle ile kısaca açıkla
+- Minimal yorum ekle, sadece karmaşık logic için
+
+## GENEL İSİMLENDİRME
+**TypeScript/Frontend:**
+- camelCase: değişkenler, fonksiyonlar
+- PascalCase: componentler, interface, type
+- kebab-case: dosya isimleri (component dosyaları PascalCase.tsx)
+
+**Java/Backend:**
+- camelCase: değişkenler, metodlar
+- PascalCase: classlar, interface
+- UPPER_SNAKE_CASE: konstantlar
+- PascalCase.java: dosya isimleri
+
+**Diğer:**
+- API endpoints: kebab-case (/api/user-profile)
+- Database: snake_case (tablo ve kolon isimleri)
+
+## FRONTEND KURALLARI (Next.js + TypeScript + TailwindCSS)
+
+### Component Yapısı
+```typescript
+interface ComponentNameProps {
+  data: string;
+  onAction: () => void;
+}
+
+export function ComponentName({ data, onAction }: ComponentNameProps) {
+  // 1. State tanımlamaları
+  // 2. Hook çağrıları
+  // 3. Event handler'lar
+  // 4. UseEffect'ler
+  // 5. Return
+}
+```
+
+### Zorunlu Kurallar
+- Props interface HER ZAMAN tanımla
+- Tek sorumluluk prensibi (bir component bir iş)
+- SADECE TailwindCSS kullan, custom CSS YAZMA
+- any KULLANMA, unknown tercih et
+- Import sırası: 1) React/Next, 2) Third-party, 3) Internal components, 4) Utils/types
+
+### State Yönetimi
+- Local state: useState
+- Server state: Next.js Server Components / fetch
+- Global: Sadece gerekirse Context API
+- Prop drilling 2+ seviye ise Context düşün
+
+### Styling
+- Mobile-first approach (sm:, md:, lg:)
+- Tailwind default palette kullan
+- Tekrar eden class'lar için cn/clsx utility
+- Component başına ortalama 8-10 class
+
+### API İşlemleri
+- Tüm API çağrıları /lib/api-client altında
+- Her endpoint için standart hata yönetimi
+- Type safety: Promise<Type> dön
+
+### Performance
+- Unique key prop (listeler için)
+- memo, useMemo, useCallback (gereksiz re-render önleme)
+- Next.js Image component kullan
+
+### Klasör Yapısı
+```
+/src
+  /app (routes ve API)
+  /components/ui (temel)
+  /components/features (özellik bazlı)
+  /lib/utils, /lib/hooks, /lib/api-client
+  /types
+  /constants
+```
+
+## BACKEND KURALLARI (Java Spring Boot - DDD + CQS)
+
+### Mimari Katmanları
+**Domain Layer (/domain):**
+- Saf business logic, framework bağımsız
+- Entity ve Repository interface'leri burada
+
+**Application Layer (/application):**
+- /command: State değiştiren operasyonlar (POST, PUT, DELETE)
+- /query: Sadece okuma (GET)
+- /dto: Data Transfer Objects
+- Her use case için ayrı class
+
+**Infrastructure Layer (/infrastructure):**
+- External sistem entegrasyonları
+- Config, exception handler
+
+**Presentation Layer (/presentation):**
+- REST controllers
+- Request/Response DTO'lar
+
+### Zorunlu Kurallar
+```java
+// Controller örneği
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+    @PostMapping
+    public ResponseEntity<UserResponseDto> create(@Valid @RequestBody UserCreateRequest request) {
+        return ResponseEntity.ok(userCreateCommand.execute(request));
+    }
+}
+
+// Command örneği
+@Service
+@RequiredArgsConstructor
+public class UserCreateCommand {
+    private final UserRepository userRepository;
+    
+    public UserResponseDto execute(UserCreateRequest request) {
+        // Business logic
+        User savedUser = userRepository.save(user);
+        return UserMapper.toDto(savedUser);
+    }
+}
+
+// DTO örneği (record kullan)
+public record UserCreateRequest(
+    @NotBlank(message = "Email boş olamaz")
+    @Email(message = "Geçersiz email formatı")
+    String email,
+    
+    @Size(min = 3, max = 50, message = "İsim 3-50 karakter arası olmalı")
+    String name
+) {}
+```
+
+### Dependency Injection
+- Constructor injection (@RequiredArgsConstructor + Lombok)
+- Field injection YAPMA
+- Circular dependency YAPMA
+
+### Validation
+- DTO seviyesinde @Valid + Bean Validation
+- Business kuralları Domain layer'da
+- Controller'da sadece @Valid, manuel validasyon YAPMA
+
+### REST API Standardı
+**Endpoint formatı:**
+- GET /api/resources - Liste
+- GET /api/resources/{id} - Tekil
+- POST /api/resources - Oluştur
+- PUT /api/resources/{id} - Güncelle
+- DELETE /api/resources/{id} - Sil
+
+**Response formatı:**
+```json
+// Başarılı
+{"data": {}, "message": "İşlem başarılı"}
+
+// Hata
+{"error": "VALIDATION_ERROR", "message": "Email formatı geçersiz", "details": []}
+```
+
+### Exception Handling
+- @RestControllerAdvice ile global exception handler
+- Her exception için spesifik handler
+- Hata mesajları Türkçe ve user-friendly
+
+### DTO Kuralları
+- Request/Response: record kullan (immutable)
+- Entity → DTO mapping için mapper class
+- Entity'leri direkt dönme, her zaman DTO kullan
+
+## KOD STİLİ TERCİHLERİ
+
+### Genel
+- Fonksiyon uzunluğu: Max 30 satır
+- Parametre sayısı: Max 4 (fazlaysa object)
+- Nested if: Max 2 seviye (daha fazlaysa refactor)
+- Magic number KULLANMA, constant tanımla
+- Unused import bırakma
+
+### Framework Özellikleri
+- Next.js 14+ App Router
+- Server Components default
+- Spring Boot 3+ ve Java 17+
+- Lombok annotations: @Data, @Builder, @RequiredArgsConstructor
+
+### Dosya Organizasyonu
+- Doğru klasör yapısını takip et
+- Next.js'de @/ alias kullan
+- Her katman kendi sorumluluğunda
+
+## HACKATHON ÖZEL KURALLARI
+
+### Hız Öncelikli
+- 3 saatlik süre kısıtlı, pragmatik ol
+- Perfect yerine working code
+- Premature optimization YAPMA
+- Önce çalışır kod, sonra optimize et
+
+### Test Stratejisi
+- Unit test YAZMA (zaman kaybı)
+- Manual test yeterli
+- Critical path'leri mutlaka test et
+
+### Dokümantasyon
+- Minimal ama yeterli
+- Karmaşık algoritmalar için kısa açıklama
+- API endpoint'ler için request/response örneği
+- Environment variable değişikliklerini dokümante et
+
+## ÖRNEK ÜRETİMLER
+
+### ✅ DOĞRU Frontend Component
+```typescript
+interface UserCardProps {
+  user: User;
+}
+
+export function UserCard({ user }: UserCardProps) {
+  return (
+    <div className="rounded-lg border p-4 shadow-sm hover:shadow-md transition-shadow">
+      <h3 className="font-semibold text-lg">{user.name}</h3>
+      <p className="text-sm text-gray-600">{user.email}</p>
+    </div>
+  );
+}
+```
+
+### ✅ DOĞRU Backend Service
+```java
+@Service
+@RequiredArgsConstructor
+public class UserCreateCommand {
+    private final UserRepository userRepository;
+    
+    public UserResponseDto execute(UserCreateRequest request) {
+        User user = User.builder()
+            .email(request.email())
+            .name(request.name())
+            .build();
+            
+        User savedUser = userRepository.save(user);
+        return UserMapper.toDto(savedUser);
+    }
+}
+```
+
+### ❌ YANLIŞ Örnekler
+- Custom CSS kullanma
+- any type kullanma
+- Field injection (@Autowired üye değişken)
+- Entity direkt dönme (DTO kullan)
+- Aşırı yorum satırı
+- Inconsistent naming
+- Magic number kullanımı
+- Inline styles
+
+## COMMIT & GIT KURALLARI
+**Format:** `<tip>: <kısa açıklama>`
+
+**Tipler:**
+- feat: Yeni özellik
+- fix: Bug düzeltme
+- refactor: Kod iyileştirme
+- style: Format değişiklikleri
+- docs: Dokümantasyon
+
+**Örnekler:**
+- feat: kullanıcı login api endpoint eklendi
+- fix: token validation hatası düzeltildi
+- refactor: user service kodları iyileştirildi
+
+## HATIRLATMALAR
+1. HER ZAMAN tip tanımla (TypeScript ve Java)
+2. SADECE TailwindCSS (Frontend)
+3. DDD + CQS mimarisine uy (Backend)
+4. Constructor injection (Backend)
+5. Record kullan (DTO'lar için)
+6. Türkçe açıklamalar
+7. Minimal yorum
+8. Hız öncelikli (3 saat)
+9. Working code > Perfect code
+10. Doğru klasör yapısı
+
+## ÇIKTI FORMATI
+Kod üretirken:
+1. Kısa Türkçe açıklama (1-2 cümle)
+2. Kod bloğu
+3. Kritik notlar (varsa)
+
+Dosya oluştururken:
+1. Doğru klasör yapısını kullan
+2. İsimlendirme konvansiyonuna uy
+3. İlgili import'ları ekle
+4. Type safety sağla
+
+---
+
+**Not:** Bu kurallar Cursor AI asistanının tüm kod üretimlerinde otomatik olarak uygulanacaktır.
+
