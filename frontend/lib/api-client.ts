@@ -18,21 +18,25 @@ export async function cevapKontrol(
   oyunId: number, 
   kullaniciCevabi: string | string[]
 ): Promise<CevapSonucu> {
+  const requestBody = { 
+    oyunId, 
+    kullaniciCevabi: typeof kullaniciCevabi === 'string' 
+      ? kullaniciCevabi 
+      : JSON.stringify(kullaniciCevabi)
+  };
+  
   const res = await fetch(`${API_BASE}/oyun/kontrol`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ 
-      oyunId, 
-      kullaniciCevabi: typeof kullaniciCevabi === 'string' 
-        ? kullaniciCevabi 
-        : JSON.stringify(kullaniciCevabi)
-    })
+    body: JSON.stringify(requestBody)
   });
   
   if (!res.ok) {
-    throw new Error('Cevap kontrol edilemedi');
+    const errorText = await res.text();
+    console.error('API Error:', errorText);
+    throw new Error(`Cevap kontrol edilemedi: ${res.status} - ${errorText}`);
   }
   
   return res.json();
