@@ -9,6 +9,7 @@ import com.zekakutusu.domain.repository.OyunIcerikRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -40,6 +41,9 @@ public class OyunGetirQuery {
         } catch (Exception e) {
             throw new RuntimeException("Seçenekler parse edilemedi", e);
         }
+        
+        // Seçenekleri karıştır (doğru cevap her zaman farklı sırada olsun)
+        Collections.shuffle(secenekler);
         
         return new OyunResponse(
             oyun.getId(),
