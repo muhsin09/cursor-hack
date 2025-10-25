@@ -55,7 +55,11 @@ export default function OyunSayfasi() {
   
   const sesOynat = () => {
     if (audioRef.current) {
-      audioRef.current.play();
+      audioRef.current.load(); // Ses dosyasını yeniden yükle
+      audioRef.current.play().catch(error => {
+        console.error('Ses çalınamadı:', error);
+        alert('Ses dosyası çalınamadı. Lütfen backend\'in çalıştığından ve ses dosyalarının mevcut olduğundan emin olun.');
+      });
     }
   };
   
@@ -128,6 +132,7 @@ export default function OyunSayfasi() {
                 <audio 
                   ref={audioRef} 
                   src={`http://localhost:8080/media/audio/${oyunVerisi.hedefVeri}`}
+                  preload="auto"
                 />
               </div>
               
