@@ -33,22 +33,62 @@ public class OyunGetirQuery {
         
         // JSON string'i List'e çevir
         List<String> secenekler;
+        List<String> gosterimIsimleri;
         try {
             secenekler = objectMapper.readValue(
                 oyun.getSeceneklerJson(), 
                 new TypeReference<List<String>>() {}
             );
+            
+            // Gösterim isimlerini parse et
+            if (oyun.getGosterimIsimleriJson() != null) {
+                gosterimIsimleri = objectMapper.readValue(
+                    oyun.getGosterimIsimleriJson(),
+                    new TypeReference<List<String>>() {}
+                );
+            } else {
+                // Eğer gösterim isimleri yoksa dosya isimlerini kullan
+                gosterimIsimleri = secenekler.stream()
+                    .map(s -> s.replace(".png", "").replace("_", " "))
+                    .toList();
+            }
         } catch (Exception e) {
             throw new RuntimeException("Seçenekler parse edilemedi", e);
         }
         
-        // Seçenekleri karıştır (doğru cevap her zaman farklı sırada olsun)
-        Collections.shuffle(secenekler);
+        // Hedef veri için gösterim ismini bul
+        String hedefVeriGosterimIsmi;
+        int hedefIndex = secenekler.indexOf(oyun.getHedefVeri());
+        if (hedefIndex >= 0) {
+            hedefVeriGosterimIsmi = gosterimIsimleri.get(hedefIndex);
+        } else {
+            // Hedef veri seçeneklerde yoksa dosya isminden oluştur
+            hedefVeriGosterimIsmi = oyun.getHedefVeri()
+                .replace(".png", "")
+                .replace(".mp3", "")
+                .replace("_", " ");
+        }
+        
+        // Seçenekleri ve gösterim isimlerini aynı sırada karıştır
+        java.util.List<Integer> indices = new java.util.ArrayList<>();
+        for (int i = 0; i < secenekler.size(); i++) {
+            indices.add(i);
+        }
+        Collections.shuffle(indices);
+        
+        List<String> karisikSecenekler = new java.util.ArrayList<>();
+        List<String> karisikGosterimIsimleri = new java.util.ArrayList<>();
+        for (int i : indices) {
+            karisikSecenekler.add(secenekler.get(i));
+            karisikGosterimIsimleri.add(gosterimIsimleri.get(i));
+        }
         
         return new OyunResponse(
             oyun.getId(),
             oyun.getHedefVeri(),
-            secenekler
+            hedefVeriGosterimIsmi,
+            karisikSecenekler,
+            karisikGosterimIsimleri
         );
     }
 }

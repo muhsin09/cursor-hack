@@ -145,11 +145,11 @@ export default function OyunSayfasi() {
                   >
                     <img 
                       src={`http://localhost:8080/media/images/${resim}`}
-                      alt={resim.replace('.png', '')}
+                      alt={oyunVerisi.gosterimIsimleri[index]}
                       className="w-full aspect-square object-cover rounded-xl sm:rounded-2xl max-w-xs mx-auto"
                     />
                     <p className="mt-2 sm:mt-3 md:mt-4 text-sm sm:text-lg md:text-2xl font-semibold text-gray-700 truncate">
-                      {resim.replace('.png', '')}
+                      {oyunVerisi.gosterimIsimleri[index]}
                     </p>
                   </button>
                 ))}
@@ -166,11 +166,11 @@ export default function OyunSayfasi() {
                 </p>
                 <img 
                   src={`http://localhost:8080/media/images/${oyunVerisi.hedefVeri}`}
-                  alt={oyunVerisi.hedefVeri.replace('.png', '')}
+                  alt={oyunVerisi.hedefVeriGosterimIsmi}
                   className="w-full aspect-square max-w-xs sm:max-w-sm mx-auto object-cover rounded-xl sm:rounded-2xl"
                 />
-                <p className="mt-3 sm:mt-4 text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 text-center truncate">
-                  {oyunVerisi.hedefVeri.replace('.png', '')}
+                <p className="mt-3 sm:mt-4 text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 text-center">
+                  {oyunVerisi.hedefVeriGosterimIsmi}
                 </p>
               </div>
               
@@ -183,11 +183,11 @@ export default function OyunSayfasi() {
                   >
                     <img 
                       src={`http://localhost:8080/media/images/${resim}`}
-                      alt={resim.replace('.png', '')}
+                      alt={oyunVerisi.gosterimIsimleri[index]}
                       className="w-full aspect-square object-cover rounded-lg sm:rounded-xl"
                     />
                     <p className="mt-2 text-xs sm:text-sm md:text-lg font-semibold text-gray-700 text-center truncate">
-                      {resim.replace('.png', '')}
+                      {oyunVerisi.gosterimIsimleri[index]}
                     </p>
                   </button>
                 ))}
@@ -222,11 +222,11 @@ export default function OyunSayfasi() {
                       )}
                       <img 
                         src={`http://localhost:8080/media/images/${resim}`}
-                        alt={resim.replace('.png', '')}
+                        alt={oyunVerisi.gosterimIsimleri[index]}
                         className="w-full aspect-square max-w-xs mx-auto object-cover rounded-xl sm:rounded-2xl"
                       />
                       <p className="mt-3 sm:mt-4 text-base sm:text-lg md:text-xl font-semibold text-gray-700 text-center truncate">
-                        {resim.replace('.png', '')}
+                        {oyunVerisi.gosterimIsimleri[index]}
                       </p>
                     </button>
                   );

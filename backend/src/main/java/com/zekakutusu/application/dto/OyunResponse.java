@@ -5,6 +5,8 @@ import java.util.List;
 public record OyunResponse(
     Long id,
     String hedefVeri,
-    List<String> secenekler
+    String hedefVeriGosterimIsmi,
+    List<String> secenekler,
+    List<String> gosterimIsimleri
 ) {}
 

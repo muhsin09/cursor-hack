@@ -31,5 +31,8 @@ public class OyunIcerik {
     
     @Column(name = "dogru_cevap", length = 500, nullable = false)
     private String dogruCevap;
+    
+    @Column(name = "gosterim_isimleri_json", length = 1000)
+    private String gosterimIsimleriJson;
 }
 
