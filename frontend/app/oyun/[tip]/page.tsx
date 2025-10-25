@@ -138,9 +138,11 @@ export default function OyunSayfasi() {
                     onClick={() => resimTikla(resim)}
                     className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 transform transition-all hover:scale-105 active:scale-95 hover:shadow-2xl"
                   >
-                    <div className="w-full aspect-square bg-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center text-4xl sm:text-5xl md:text-6xl max-w-xs mx-auto">
-                      🖼️
-                    </div>
+                    <img 
+                      src={`http://localhost:8080/media/images/${resim}`}
+                      alt={resim.replace('.png', '')}
+                      className="w-full aspect-square object-cover rounded-xl sm:rounded-2xl max-w-xs mx-auto"
+                    />
                     <p className="mt-2 sm:mt-3 md:mt-4 text-sm sm:text-lg md:text-2xl font-semibold text-gray-700 truncate">
                       {resim.replace('.png', '')}
                     </p>
@@ -157,9 +159,11 @@ export default function OyunSayfasi() {
                 <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-700 mb-3 sm:mb-4 text-center">
                   Aynısını Bul:
                 </p>
-                <div className="w-full aspect-square max-w-xs sm:max-w-sm mx-auto bg-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center text-6xl sm:text-7xl md:text-9xl">
-                  🎯
-                </div>
+                <img 
+                  src={`http://localhost:8080/media/images/${oyunVerisi.hedefVeri}`}
+                  alt={oyunVerisi.hedefVeri.replace('.png', '')}
+                  className="w-full aspect-square max-w-xs sm:max-w-sm mx-auto object-cover rounded-xl sm:rounded-2xl"
+                />
                 <p className="mt-3 sm:mt-4 text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 text-center truncate">
                   {oyunVerisi.hedefVeri.replace('.png', '')}
                 </p>
@@ -172,9 +176,11 @@ export default function OyunSayfasi() {
                     onClick={() => resimTikla(resim)}
                     className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 transform transition-all hover:scale-105 active:scale-95 hover:shadow-xl"
                   >
-                    <div className="w-full aspect-square bg-gray-200 rounded-lg sm:rounded-xl flex items-center justify-center text-3xl sm:text-4xl md:text-5xl">
-                      🖼️
-                    </div>
+                    <img 
+                      src={`http://localhost:8080/media/images/${resim}`}
+                      alt={resim.replace('.png', '')}
+                      className="w-full aspect-square object-cover rounded-lg sm:rounded-xl"
+                    />
                     <p className="mt-2 text-xs sm:text-sm md:text-lg font-semibold text-gray-700 text-center truncate">
                       {resim.replace('.png', '')}
                     </p>
@@ -209,9 +215,11 @@ export default function OyunSayfasi() {
                           {sira + 1}
                         </div>
                       )}
-                      <div className="w-full aspect-square max-w-xs mx-auto bg-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center text-5xl sm:text-6xl md:text-7xl">
-                        📷
-                      </div>
+                      <img 
+                        src={`http://localhost:8080/media/images/${resim}`}
+                        alt={resim.replace('.png', '')}
+                        className="w-full aspect-square max-w-xs mx-auto object-cover rounded-xl sm:rounded-2xl"
+                      />
                       <p className="mt-3 sm:mt-4 text-base sm:text-lg md:text-xl font-semibold text-gray-700 text-center truncate">
                         {resim.replace('.png', '')}
                       </p>
