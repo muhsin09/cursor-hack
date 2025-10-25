@@ -97,31 +97,31 @@ export default function OyunSayfasi() {
   
   return (
     <>
-      <main className="min-h-screen bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 p-8">
+      <main className="min-h-screen bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 p-4 sm:p-6 md:p-8">
         <div className="max-w-6xl mx-auto">
           {/* Başlık ve Geri Butonu */}
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8 gap-4">
             <button
               onClick={() => router.push('/')}
-              className="bg-white text-gray-800 px-6 py-3 rounded-full text-xl font-semibold hover:bg-gray-100 transition-all"
+              className="bg-white text-gray-800 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-base sm:text-xl font-semibold hover:bg-gray-100 transition-all active:scale-95 w-full sm:w-auto"
             >
               ← Ana Menü
             </button>
-            <h1 className="text-4xl font-bold text-white">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center">
               {tip === 'ses-eslestirme' && '🎧 Sesi Dinle, Resmi Bul'}
               {tip === 'gorsel-eslestirme' && '👁️ Aynısını Bul'}
               {tip === 'siralama' && '📚 Hikayeyi Sırala'}
             </h1>
-            <div className="w-32"></div>
+            <div className="hidden sm:block w-32"></div>
           </div>
           
           {/* Ses Eşleştirme Modülü */}
           {tip === 'ses-eslestirme' && (
             <div className="flex flex-col items-center">
-              <div className="mb-12">
+              <div className="mb-8 sm:mb-12">
                 <button
                   onClick={sesOynat}
-                  className="bg-green-500 hover:bg-green-600 text-white rounded-full w-48 h-48 flex items-center justify-center text-8xl transform transition-all hover:scale-110 shadow-2xl"
+                  className="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white rounded-full w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 flex items-center justify-center text-5xl sm:text-6xl md:text-8xl transform transition-all hover:scale-110 active:scale-95 shadow-2xl"
                 >
                   ▶️
                 </button>
@@ -131,17 +131,17 @@ export default function OyunSayfasi() {
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-8 max-w-3xl">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-4xl w-full px-2">
                 {oyunVerisi.secenekler.map((resim, index) => (
                   <button
                     key={index}
                     onClick={() => resimTikla(resim)}
-                    className="bg-white rounded-3xl p-8 transform transition-all hover:scale-105 hover:shadow-2xl"
+                    className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 transform transition-all hover:scale-105 active:scale-95 hover:shadow-2xl"
                   >
-                    <div className="w-64 h-64 bg-gray-200 rounded-2xl flex items-center justify-center text-6xl">
+                    <div className="w-full aspect-square bg-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center text-4xl sm:text-5xl md:text-6xl max-w-xs mx-auto">
                       🖼️
                     </div>
-                    <p className="mt-4 text-2xl font-semibold text-gray-700">
+                    <p className="mt-2 sm:mt-3 md:mt-4 text-sm sm:text-lg md:text-2xl font-semibold text-gray-700 truncate">
                       {resim.replace('.png', '')}
                     </p>
                   </button>
@@ -153,29 +153,29 @@ export default function OyunSayfasi() {
           {/* Görsel Eşleştirme Modülü */}
           {tip === 'gorsel-eslestirme' && (
             <div className="flex flex-col items-center">
-              <div className="mb-12 bg-white rounded-3xl p-8 border-8 border-yellow-400 shadow-2xl">
-                <p className="text-2xl font-bold text-gray-700 mb-4 text-center">
+              <div className="mb-8 sm:mb-12 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border-4 sm:border-6 md:border-8 border-yellow-400 shadow-2xl max-w-sm sm:max-w-md md:max-w-lg mx-auto w-full">
+                <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-700 mb-3 sm:mb-4 text-center">
                   Aynısını Bul:
                 </p>
-                <div className="w-80 h-80 bg-gray-200 rounded-2xl flex items-center justify-center text-9xl">
+                <div className="w-full aspect-square max-w-xs sm:max-w-sm mx-auto bg-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center text-6xl sm:text-7xl md:text-9xl">
                   🎯
                 </div>
-                <p className="mt-4 text-3xl font-bold text-gray-800 text-center">
+                <p className="mt-3 sm:mt-4 text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 text-center truncate">
                   {oyunVerisi.hedefVeri.replace('.png', '')}
                 </p>
               </div>
               
-              <div className="grid grid-cols-4 gap-6 max-w-5xl">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-5xl w-full px-2">
                 {oyunVerisi.secenekler.map((resim, index) => (
                   <button
                     key={index}
                     onClick={() => resimTikla(resim)}
-                    className="bg-white rounded-2xl p-6 transform transition-all hover:scale-105 hover:shadow-xl"
+                    className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 transform transition-all hover:scale-105 active:scale-95 hover:shadow-xl"
                   >
-                    <div className="w-40 h-40 bg-gray-200 rounded-xl flex items-center justify-center text-5xl">
+                    <div className="w-full aspect-square bg-gray-200 rounded-lg sm:rounded-xl flex items-center justify-center text-3xl sm:text-4xl md:text-5xl">
                       🖼️
                     </div>
-                    <p className="mt-2 text-lg font-semibold text-gray-700 text-center">
+                    <p className="mt-2 text-xs sm:text-sm md:text-lg font-semibold text-gray-700 text-center truncate">
                       {resim.replace('.png', '')}
                     </p>
                   </button>
@@ -187,11 +187,11 @@ export default function OyunSayfasi() {
           {/* Sıralama Modülü */}
           {tip === 'siralama' && (
             <div className="flex flex-col items-center">
-              <p className="text-3xl font-bold text-white mb-8">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8 text-center px-4">
                 Resim üzerine tıklayarak sırala (1, 2, 3)
               </p>
               
-              <div className="grid grid-cols-3 gap-8 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 w-full max-w-5xl px-2">
                 {oyunVerisi.secenekler.map((resim, index) => {
                   const sira = siralamaSonuc.indexOf(resim);
                   const secildi = sira >= 0;
@@ -200,19 +200,19 @@ export default function OyunSayfasi() {
                     <button
                       key={index}
                       onClick={() => resimTikla(resim)}
-                      className={`relative bg-white rounded-3xl p-8 transform transition-all hover:scale-105 ${
-                        secildi ? 'ring-8 ring-blue-400' : ''
+                      className={`relative bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 transform transition-all hover:scale-105 active:scale-95 ${
+                        secildi ? 'ring-4 sm:ring-6 md:ring-8 ring-blue-400' : ''
                       }`}
                     >
                       {secildi && (
-                        <div className="absolute top-4 right-4 bg-red-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl font-bold shadow-lg z-10">
+                        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 bg-red-500 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 flex items-center justify-center text-xl sm:text-2xl md:text-3xl font-bold shadow-lg z-10">
                           {sira + 1}
                         </div>
                       )}
-                      <div className="w-64 h-64 bg-gray-200 rounded-2xl flex items-center justify-center text-7xl">
+                      <div className="w-full aspect-square max-w-xs mx-auto bg-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center text-5xl sm:text-6xl md:text-7xl">
                         📷
                       </div>
-                      <p className="mt-4 text-xl font-semibold text-gray-700 text-center">
+                      <p className="mt-3 sm:mt-4 text-base sm:text-lg md:text-xl font-semibold text-gray-700 text-center truncate">
                         {resim.replace('.png', '')}
                       </p>
                     </button>
@@ -223,7 +223,7 @@ export default function OyunSayfasi() {
               <button
                 onClick={siralamaKontrol}
                 disabled={siralamaSonuc.length !== oyunVerisi.secenekler.length}
-                className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white text-3xl font-bold py-6 px-16 rounded-full transform transition-all hover:scale-110 shadow-2xl disabled:cursor-not-allowed"
+                className="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 disabled:bg-gray-400 text-white text-xl sm:text-2xl md:text-3xl font-bold py-4 px-8 sm:py-5 sm:px-12 md:py-6 md:px-16 rounded-full transform transition-all hover:scale-110 active:scale-95 shadow-2xl disabled:cursor-not-allowed w-full sm:w-auto max-w-md"
               >
                 Kontrol Et
               </button>
