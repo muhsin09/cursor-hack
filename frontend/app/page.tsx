@@ -57,7 +57,7 @@ export default function LobiSayfasi() {
             className="group"
           >
             <div className="relative bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 rounded-3xl sm:rounded-[2rem] p-8 sm:p-10 min-h-64 sm:min-h-72 md:min-h-80 flex flex-col items-center justify-center transform transition-all duration-300 hover:scale-110 hover:rotate-2 shadow-2xl cursor-pointer active:scale-95 border-4 border-white/30 sparkle-border overflow-hidden">
-              <div className="absolute top-3 left-3 text-3xl animate-wiggle">🌈</div>
+              <div className="absolute top-3 left-3 text-3xl animate-wiggle">💎</div>
               <div className="absolute bottom-3 right-3 text-3xl animate-sparkle">⭐</div>
               <div className="text-7xl sm:text-8xl md:text-9xl mb-6 sm:mb-8 group-hover:animate-bounce animate-pulse-grow">
                 👁️
