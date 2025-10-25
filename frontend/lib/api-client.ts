@@ -1,0 +1,40 @@
+import { OyunVerisi, CevapSonucu } from '@/types/oyun';
+
+const API_BASE = 'http://localhost:8080/api';
+
+export async function oyunGetir(oyunTipi: string): Promise<OyunVerisi> {
+  const res = await fetch(`${API_BASE}/oyun/${oyunTipi}`, {
+    cache: 'no-store'
+  });
+  
+  if (!res.ok) {
+    throw new Error('Oyun yüklenemedi');
+  }
+  
+  return res.json();
+}
+
+export async function cevapKontrol(
+  oyunId: number, 
+  kullaniciCevabi: string | string[]
+): Promise<CevapSonucu> {
+  const res = await fetch(`${API_BASE}/oyun/kontrol`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ 
+      oyunId, 
+      kullaniciCevabi: typeof kullaniciCevabi === 'string' 
+        ? kullaniciCevabi 
+        : JSON.stringify(kullaniciCevabi)
+    })
+  });
+  
+  if (!res.ok) {
+    throw new Error('Cevap kontrol edilemedi');
+  }
+  
+  return res.json();
+}
+

@@ -1,0 +1,5 @@
+Bu klasörde ses dosyaları bulunmalıdır:
+kopek.mp3, kedi.mp3, kus.mp3, inek.mp3
+
+Not: Gerçek MP3 dosyaları manuel olarak eklenmelidir.
+

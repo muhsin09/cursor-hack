@@ -1,0 +1,11 @@
+Bu klasörde resim dosyaları bulunmalıdır:
+kopek.png, kedi.png, kus.png, inek.png, fare.png, balik.png, tavuk.png, papagan.png, karga.png,
+top_mavi.png, top_kirmizi.png, kutu_mavi.png, araba_mavi.png,
+elma_kirmizi.png, elma_yesil.png, armut.png, muz.png,
+araba_sari.png, otobus_sari.png, bisiklet.png,
+yumurta.png, catlak.png, civciv.png,
+tohum.png, cicek.png, agac.png,
+tirtiL.png, kozalak.png, kelebek.png
+
+Not: Gerçek PNG dosyaları manuel olarak eklenmelidir.
+
