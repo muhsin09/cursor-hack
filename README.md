@@ -2,6 +2,14 @@
 
 Okul öncesi (3-6 yaş) çocuklar için temel bilişsel becerileri geliştiren 3-in-1 dijital aktivite platformu.
 
+## 🔗 Proje Bilgileri
+
+**GitHub Repository:** [https://github.com/muhsin09/cursor-hack](https://github.com/muhsin09/cursor-hack)
+
+**Geliştiriciler:**
+- [Muhsin Özbek](https://www.linkedin.com/in/muhsin-ozbek/)
+- [İbrahim Sercan Arıkan](https://www.linkedin.com/in/ibrahim-sercan-arikan)
+
 ## 📋 Proje Yapısı
 
 ```
@@ -194,6 +202,17 @@ Projede **Türkçe isimlendirme** ama **İngilizce karakterler** kullanılıyor:
 ## 👥 Takım
 
 2 kişilik full-stack takım için 3 saatlik hackathon projesi.
+
+## 🚀 Gelecek Geliştirmeler
+
+### Kullanıcı Soru Seti Yönetimi
+Sonraki versiyonda kullanıcılar için özel soru seti yönetim paneli eklenecek:
+
+- **Özel Soru Setleri Oluşturma:** Ebeveynler ve eğitimciler kendi soru setlerini tasarlayabilecek
+- **Aktif/Pasif Yönetimi:** Soruları istedikleri zaman aktif veya pasif hale getirebilecekler
+- **Özel Medya Yükleme:** Kendi resim ve ses dosyalarını yükleyebilecekler
+- **Zorluk Seviyesi:** Soru setlerine yaş grubuna uygun zorluk seviyesi atayabilecekler
+- **Kategori Yönetimi:** Özel kategoriler ve temalar oluşturabilecekler
 
 ## 📄 Lisans
 
